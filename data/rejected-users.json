@@ -1,0 +1,58 @@
+[
+{
+"id": "1",
+"name": "Alice Smith",
+"email": "alice.smith@example.com",
+"role": "Officer",
+"status": "Rejected"
+},
+{
+"id": "2",
+"name": "Bob Johnson",
+"email": "bob.johnson@example.com",
+"role": "Son",
+"status": "Rejected"
+},
+{
+"id": "3",
+"name": "Charlie Brown",
+"email": "charlie.brown@example.com",
+"role": "Spouse",
+"status": "Rejected"
+},
+{
+"id": "4",
+"name": "Diana Prince",
+"email": "diana.prince@example.com",
+"role": "Veterans",
+"status": "Rejected"
+},
+{
+"id": "5",
+"name": "Clark Kent",
+"email": "clark.kent@example.com",
+"role": "Guardian",
+"status": "Rejected"
+},
+{
+"id": "6",
+"name": "Ethan Hunt",
+"email": "ethan.hunt@example.com",
+"role": "Agent",
+"status": "Rejected"
+},
+{
+"id": "7",
+"name": "Fiona Gallagher",
+"email": "fiona.gallagher@example.com",
+"role": "Coordinator",
+"status": "Rejected"
+},
+{
+"id": "8",
+"name": "George Bailey",
+"email": "george.bailey@example.com",
+"role": "Supervisor",
+"status": "Rejected"
+}
+]

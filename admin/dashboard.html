@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bellefair&family=Gravitas+One&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>Admin Dashboard</title>
+    <script>
+    // CRITICAL: Checks localStorage instantly and applies the class to the <html> tag
+    if (localStorage.getItem('theme') === 'dark') {
+        document.documentElement.classList.add('dark-theme');
+    }
+</script>
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Feather Icons - a simple way to get icons without loading a heavy font -->
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div>
+                <div class="logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="white" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-zap"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                    <span class="logo-text">IronWall</span>
+                </div>
+                <nav class="sidebar-nav">
+                    <ul>
+                        <li><a href="/admin/dashboard.html" class="active"><svg data-feather="grid"></svg> Dashboard</a></li>
+                        <li><a href="/admin/approved-users.html"><svg data-feather="users"></svg> Approved Users</a></li>
+                        <li><a href="/admin/rejected-users.html"><svg data-feather="user-x"></svg> Blocked Users</a></li>
+                        <li><a href="/admin/requests.html"><svg data-feather="list"></svg> Requests</a></li>
+                        <li><a href="/admin/malicious.html"><svg data-feather="alert-triangle"></svg> Malicious Logs</a></li>
+                        <li><a href="/admin/settings.html"><svg data-feather="settings"></svg> Settings</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="logout-section">
+                <a href="/index.html" style="background-color: aliceblue; color:black" class="btn btn-primary btn-block">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><g transform="translate(0, 5)"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></g></svg> Logout
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="header">
+                <div class="page-title">
+                    <h1>Admin Dashboard</h1>
+                </div>
+                <div class="header-right">
+                    <button id="theme-toggle" class="btn" style="
+                        background: none; 
+                        border: none; 
+                        padding: 0.5rem; 
+                        margin-right: 1.5rem; 
+                        cursor: pointer;
+                    ">
+                        <svg id="theme-icon" data-feather="moon" width="24" height="24" color="var(--color-text-secondary)"></svg>
+                    </button>
+                    <div class="search-bar">
+                        <input type="text" placeholder="Search">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    </div>
+                    <div class="header-icons">
+                        <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></a>
+                        <a href="/admin/settings.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></a>
+                    </div>
+                </div>
+            </header>
+
+            <section>
+                <div class="card-container">
+                    <div class="card">
+                        <h3>Approved Users</h3>
+                        <div class="stat" id="approved-users-stat">1,234</div>
+                        <p>+0.2% from last week</p>
+                    </div>
+                    <div class="card">
+                        <h3>Pending Requests</h3>
+                        <div class="stat" id="pending-requests-stat">56</div>
+                        <p>+1.5% from last week</p>
+                    </div>
+                    <div class="card">
+                        <h3>Malicious Logs</h3>
+                        <div class="stat" id="malicious-logs-stat">8</div>
+                        <p>-2.1% from last week</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="recent-activity-section">
+                <h2>Recent Activity</h2>
+                <div class="table-container">
+                    <div class="activity-log">
+                        <ul>
+                            <!-- Activity will be dynamically added here by JavaScript -->
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Script to replace feather icons with SVG code -->
+    <script>
+        feather.replace();
+    </script>
+    <script src="/js/dashboard.js"></script>
+</body>
+</html>

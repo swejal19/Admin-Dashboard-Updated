@@ -1,0 +1,683 @@
+:root {
+    /* Base Colors - Simplified */
+    --color-white: #ffffff;
+    --color-black: #000000;
+    
+    /* Core UI Palette (Light Theme Focus) */
+    --color-bg-primary: #f8f9fa; /* Light Background */
+    --color-bg-card: var(--color-white); /* Card/Box Background */
+    --color-text-main: #333333; /* Dark Text */
+    --color-text-secondary: #6A7382; /* Secondary/Muted Text */
+    --color-border: #e0e0e0;
+    
+    /* Modern Accent Colors (Teal/Green, like GK Dashboard) */
+    --color-primary-accent: #2e8b57; /* GK Dashboard's main teal */
+    --color-primary-hover: #27794b;
+    --color-secondary-accent: #f39c12; /* Orange for warnings/secondary data */
+    --color-green: #2ecc71;
+    --color-red: #e74c3c;
+    
+    /* Modern Design Elements */
+    --border-radius-base: 12px;
+    --border-radius-card: 16px;
+    --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.04);
+    --shadow-card: 0 8px 20px rgba(0, 0, 0, 0.08);
+
+    /* Data Visualization Colors (from Polysure/Purse images) */
+    --data-color-1: #ffb74d; /* Yellow/Orange */
+    --data-color-2: #8e44ad; /* Purple */
+    --data-color-3: #90ee90; /* Bright Green */
+    --gk-chart-blue: #7DD0C3; /* Specific blue from GK charts */
+    --gk-chart-dark-blue: #3E8B80; /* Specific dark blue from GK charts */
+    --gk-chart-purple: #9B5DE5; /* Specific purple from GK charts */
+
+    /* Sidebar Colors (Light/Default) */
+    --color-sidebar-bg: #2D6A61; 
+    --color-sidebar-text: var(--color-white);
+    --color-sidebar-inactive-text: rgba(255, 255, 255, 0.8);
+    --color-sidebar-hover-bg: rgba(255, 255, 255, 0.1);
+    --color-sidebar-active-bg: var(--color-white);
+    --color-sidebar-active-text: var(--color-primary-accent);
+}
+
+/* Dark Theme Variables (Apply this class to the body to switch themes) */
+html.dark-theme {
+    /* Dark Backgrounds matching the image */
+    --color-bg-primary: #1F2231; /* Deep Dark Background */
+    --color-bg-card: #272B3F; /* Card/Box Background - Slightly lighter than primary */
+    --color-text-main: #E0E0E0;
+    --color-text-secondary: #A0A0A0;
+    --color-border: #3A4056; /* Darker Border */
+    --shadow-light: none;
+    --shadow-card: none;
+    
+    /* Dark Sidebar Colors */
+    --color-sidebar-bg: #1F2231; /* Use primary background for sidebar as in the image */
+    --color-sidebar-text: var(--color-white);
+    --color-sidebar-inactive-text: #E0E0E0; /* Brighter for dark theme */
+    --color-sidebar-hover-bg: #3A4056; /* Darker hover for contrast */
+    --color-sidebar-active-bg: #4A4F6A; /* Active background from image */
+    --color-sidebar-active-text: var(--color-white); /* White text for active item */
+
+    /* Data Visualization/Accent Adjustments for dark theme contrast */
+    --color-primary-accent: #5D5FEF; /* Brighter, more purple primary accent from the image's buttons/cards */
+    --color-primary-hover: #7E80FF;
+
+    
+}
+
+
+/* Global Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    color: var(--color-text-main);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body {
+    background-color: var(--color-bg-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Typography */
+h1 {
+    font-family: "Archivo Black", sans-serif;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-top: 0.5rem;
+    color: var(--color-text-secondary);
+}
+.lg{
+    margin-bottom: 10px;
+}
+/* Buttons */
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: var(--border-radius-base);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 0 10px 0 10px;
+}
+
+.btn-primary {
+    background-color: var(--color-primary-accent);
+    color: var(--color-white);
+    box-shadow: 0 4px 10px rgba(46, 139, 87, 0.3);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-hover);
+    /* Update hover shadow to use new color in dark theme */
+    box-shadow: 0 6px 15px rgba(var(--color-primary-accent), 0.4); 
+    transform: translateY(-1px);
+}
+
+.btn-success { background-color: var(--color-green); color: var(--color-white); }
+.btn-success:hover { background-color: #27ae60; }
+
+.btn-danger { background-color: var(--color-red); color: var(--color-white); }
+.btn-danger:hover { background-color: #c0392b; }
+
+.btn-warning { background-color: var(--color-secondary-accent); color: var(--color-white); }
+.btn-warning:hover { background-color: #e67e22; }
+
+.btn-delete { background-color: var(--color-red); color: var(--color-white); }
+.btn-restore { background-color: var(--color-green); color: var(--color-white); }
+
+/* Forms */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-base);
+    background-color: var(--color-bg-card);
+    color: var(--color-text-main);
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    border-color: var(--color-primary-accent);
+    outline: none;
+}
+
+.form-group input::placeholder {
+    color: var(--color-text-secondary);
+}
+.two-factor-container {
+    display: flex;
+    /* justify-content: flex-end; */
+    margin-bottom: 1rem;
+}
+
+.two-factor-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    margin-bottom: 0; 
+}
+
+.two-factor-label input[type="checkbox"] {
+    display: inline;
+    width: auto;
+    padding: 0;
+    margin: 0;
+    border: none;
+    line-height: normal; 
+}
+/* .checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.checkbox-group label {
+    display: inline;
+    margin-bottom: 0;
+} */
+
+/* Dashboard Layout (FULL SCREEN - NO MARGINS) */
+.dashboard-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw; /* Occupy full viewport width */
+    margin: 0; /* Remove any external margins */
+    border-radius: 0; /* No rounding on the container itself */
+    overflow: hidden;
+    box-shadow: none; /* No shadow on the main container for full screen */
+    background-color: var(--color-bg-primary); /* Ensures background is correct */
+}
+
+/* Sidebar (Solid block, slightly different background for GK look) */
+.sidebar {
+    width: 250px;
+    position: fixed;
+    left: 8px;
+    height: 98vh;
+    /* Updated to use variable for dark/light theme switching */
+    background-color: var(--color-sidebar-bg); 
+    padding: 2rem 1.5rem;
+    border-right: none; /* No border for seamless full screen */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1); /* Subtle internal shadow to separate from main content */
+    z-index: 10; /* Ensure sidebar is above main content if needed */
+    border-radius: 20px;
+    margin: 8px 0 8px 0;
+}
+
+.sidebar .logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    color: var(--color-sidebar-text); /* Use sidebar text color */
+}
+
+.sidebar .logo-text {
+    font-weight: 700;
+    font-size: 2rem;
+    color: var(--color-sidebar-text); /* Use sidebar text color */
+    margin-top: -6px;
+    margin-left: 5px;
+}
+
+/* Adjust sidebar nav colors for the dark teal background */
+.sidebar-nav a {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    margin-bottom: 0.4rem;
+    text-decoration: none;
+    border-radius: var(--border-radius-base);
+    color: var(--color-sidebar-inactive-text); /* Lighter text for contrast */
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+.sidebar-nav ul{
+    list-style-type: none;
+}
+.sidebar-nav a:hover {
+    background-color: var(--color-sidebar-hover-bg); /* White hover for dark sidebar */
+    color: var(--color-sidebar-text);
+}
+
+.sidebar-nav a.active {
+    background-color: var(--color-sidebar-active-bg); /* White background for active item */
+    color: var(--color-sidebar-active-text); /* Teal text for active item */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.sidebar-nav a.active svg {
+    fill: var(--color-sidebar-active-text); /* Teal icon for active item */
+}
+
+.sidebar-nav a svg {
+    margin-right: 1rem;
+    fill: var(--color-sidebar-inactive-text); /* Lighter icons for contrast */
+    width: 20px;
+    height: 20px;
+    transition: fill 0.2s;
+}
+
+.sidebar-nav a:hover svg {
+    fill: var(--color-sidebar-text);
+}
+
+.sidebar-nav a.active:hover svg {
+    fill: var(--color-sidebar-active-text);
+}
+
+.sidebar .logout-section {
+    padding-top: 1rem;
+    /* Use dynamic color that works in both light and dark sidebar modes */
+    border-top: 1px solid rgba(255, 255, 255, 0.2); 
+}
+
+/* Dark Theme specific sidebar adjustment for better contrast on border */
+html.dark-theme .sidebar .logout-section {
+    border-top: 1px solid var(--color-border);
+}
+html.dark-theme .sidebar{
+   background-color: var(--color-sidebar-hover-bg);
+}
+
+html.dark-theme .sidebar .logout-section a {
+    /* Set the text color of the link, which the SVG's currentColor inherits, to black */
+    color: var(--color-black) !important; 
+}
+
+html.dark-theme .sidebar .logout-section svg {
+    /* Explicitly set the SVG's color properties to black as a fallback */
+    color: var(--color-black) !important; 
+    stroke: var(--color-black) !important; 
+}
+
+html.dark-theme .sidebar .logout-section a:hover {
+    /* Override hover state to ensure the text and icon remain black on hover in dark mode */
+    color: var(--color-black) !important; 
+}
+
+html.dark-theme .sidebar .logout-section a:hover svg {
+    /* Ensure the icon remains black even on hover */
+    color: var(--color-black) !important;
+    stroke: var(--color-black) !important;
+}
+
+/* Main Content */
+.main-content {
+    flex-grow: 1;
+    margin-left: 258px;
+    padding: 140px 2rem 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-bg-primary);
+    overflow-y: auto; 
+}
+
+/* Header */
+/* .header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 0.5rem;
+    gap: 1rem;
+} */
+ .header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+    gap: 1rem;
+
+    position: fixed;
+    top: 0;
+    left: 258px;
+    right: 0;
+    z-index: 50;
+    background-color: var(--color-bg-primary);
+
+    padding-top: 2rem;
+    padding-right: 2rem;
+    padding-left: 2rem;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 0;
+    }
+.header .search-bar {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-base);
+    padding: 0.5rem 1rem;
+    background-color: var(--color-bg-card);
+    flex-grow: 1; 
+    min-width: 200px;
+    margin-left: auto;
+}
+
+.header .search-bar input {
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 0;
+}
+
+.header .header-right {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.header .header-icons a {
+    margin-left: 1.5rem;
+    text-decoration: none;
+    color: var(--color-text-secondary);
+}
+
+/* Cards (Grid and Card Styles) */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.card {
+    background-color: var(--color-bg-card);
+    padding: 2rem;
+    border-radius: var(--border-radius-card);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-card);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-align: center;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--color-text-secondary);
+}
+
+.card .stat {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+    line-height: 1.2;
+}
+
+/* Specific Card Color Styles (for Polysure/Purse look) */
+/* The dark image has a 'My Card' with a purple/blue background */
+.card.accent-1 { background-color: var(--data-color-1); border: none; }
+.card.accent-2 { background-color: var(--data-color-2); border: none; }
+.card.accent-3 { background-color: var(--data-color-3); border: none; }
+.card.accent-1, .card.accent-2, .card.accent-3 {
+    /* Set text to black for light theme accent colors */
+    color: var(--color-black); 
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+.card.accent-1 *, .card.accent-2 *, .card.accent-3 * {
+    /* Ensure all child elements have high contrast text in light theme */
+    color: var(--color-black); 
+}
+
+/* Override text color for accent cards in dark theme for readability */
+html.dark-theme .card.accent-1, 
+html.dark-theme .card.accent-2, 
+html.dark-theme .card.accent-3 {
+    color: var(--color-white); /* White text on dark accent background */
+}
+
+html.dark-theme .card.accent-1 *, 
+html.dark-theme .card.accent-2 *, 
+html.dark-theme .card.accent-3 * {
+    color: var(--color-white); /* White text on dark accent background */
+}
+
+/* Tables */
+.table-container {
+    background-color: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-card);
+    overflow-x: auto;
+    box-shadow: var(--shadow-light);
+}
+
+.activity-log ul li{
+    margin: 10px 0 10px 10px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.table td:last-child {
+    text-align: center;
+    display: flex; /* Use flexbox to center multiple items */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    gap: 0.5rem; /* Add some space between the buttons */
+}
+
+.table th, .table td {
+    padding: 1rem 1.5rem;
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+}
+#sp-th{
+    text-align: center;
+}
+
+.table th {
+    background-color: var(--color-bg-card);
+    color: var(--color-text-secondary);
+    font-weight: 600;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.dark-table {
+    background-color: var(--color-bg-card);
+}
+.dark-table th {
+    background-color: var(--color-bg-card);
+    color: var(--color-text-secondary);
+}
+
+.dark-table td {
+    color: var(--color-text-main);
+    border-color: var(--color-border);
+}
+
+/* Malicious Logs table specific colors */
+.status.active { color: var(--color-green); }
+.status.rejected { color: var(--color-red); }
+.status.blocked { color: var(--color-red); }
+.status.pending { color: var(--color-secondary-accent); }
+
+
+/* Footer */
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    margin-top: auto;
+    border-top: 1px solid var(--color-border);
+    background-color: var(--color-bg-card);
+}
+
+/* Login and Sign Up Pages */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.auth-box {
+    background-color: var(--color-bg-card);
+    padding: 2.5rem;
+    border-radius: var(--border-radius-card);
+    box-shadow: var(--shadow-card);
+    width: 400px;
+    text-align: center;
+    border: 1px solid var(--color-border);
+}
+
+/* Modal styles */
+.modal-content {
+    background-color: var(--color-bg-card);
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid var(--color-border);
+    width: 80%;
+    max-width: 500px;
+    border-radius: var(--border-radius-base);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+
+/* Pagination */
+.pagination button {
+    padding: 0.5rem 0.8rem;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    background-color: var(--color-bg-card);
+    color: var(--color-text-main);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.pagination button:hover {
+    background-color: var(--color-primary-accent);
+    color: var(--color-white);
+    border-color: var(--color-primary-accent);
+}
+
+.pagination button.active {
+    background-color: var(--color-primary-accent);
+    color: var(--color-white);
+    font-weight: 600;
+    border-color: var(--color-primary-accent);
+}
+
+/* Responsive Design */
+
+@media (max-width: 1036px) {
+.main-content {
+    padding: 190px 2rem 2rem 2rem;
+ }
+}
+
+@media (max-width: 768px) {
+    .dashboard-container {
+        flex-direction: column;
+        width: 100%; 
+        height: auto; 
+        overflow: visible;
+    }
+
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--color-border);
+        padding: 1rem;
+        background-color: var(--color-sidebar-bg); 
+        position: static;
+        height: auto;
+        margin: 0;
+        border-radius: 0;
+    }
+    .main-content {
+        margin-left: 0; 
+        overflow-y: visible;
+        padding-top: 2rem; 
+    }
+    h1 {
+        font-size: 1.5rem;
+        margin-bottom: 0;
+        margin-right: 0.5rem;
+        flex-shrink: 0;
+    }
+
+    .header .header-right {
+        flex-shrink: 0;
+        margin-left: 0.5rem;
+    }
+    .header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    position: static; 
+    top: auto;
+    left: auto;
+    right: auto;
+    z-index: auto;
+    width: 100%;
+    padding-left: 1rem; 
+    padding-right: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    }
+    
+    .header .search-bar {
+        flex-basis: 100%;
+        width: 100%;
+        margin-bottom: 0;
+        margin-left: 0;
+    }
+    .card-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .footer {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+}
