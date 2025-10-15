@@ -26,4 +26,4 @@ HTML5: For page structure and content.
 
 CSS3 (style.css): For layout, aesthetics, and responsiveness.
 
-JavaScript (js/): For all client-side logic, interactivity, and fetching/manipulating data from the local JSON files.
+JavaScript (js/): For all client-side logic, interactivity.
